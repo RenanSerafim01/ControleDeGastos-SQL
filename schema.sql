@@ -1,18 +1,10 @@
--- ==========================================
--- SISTEMA DE CONTROLE DE GASTOS - SUPABASE
--- Arquitetura construída no PostgreSQL
--- ==========================================
-
--- 1. Criação do Tipo Customizado (ENUM)
 CREATE TYPE tipo_pagamento AS ENUM ('CREDITO', 'DEBITO', 'PIX', 'DINHEIRO');
 
--- 2. Tabela de Categorias
 CREATE TABLE ref_expense_category (
     id SERIAL PRIMARY KEY,
     category_name TEXT NOT NULL
 );
 
--- 3. Tabela de Despesas Recorrentes (Moldes / Assinaturas)
 CREATE TABLE cfg_recurring_expense (
     id SERIAL PRIMARY KEY,
     id_ref_expense_category INT REFERENCES ref_expense_category(id),
@@ -23,7 +15,6 @@ CREATE TABLE cfg_recurring_expense (
     is_active BOOLEAN DEFAULT true
 );
 
--- 4. Tabela Principal de Transações (A base de gastos)
 CREATE TABLE trx_expense (
     id SERIAL PRIMARY KEY,
     id_ref_expense_category INT REFERENCES ref_expense_category(id),
@@ -34,7 +25,6 @@ CREATE TABLE trx_expense (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 5. Tabela de Auditoria (Câmera de Segurança com JSONB)
 CREATE TABLE log_expense_audit (
     id SERIAL PRIMARY KEY,
     action TEXT NOT NULL,
@@ -43,7 +33,6 @@ CREATE TABLE log_expense_audit (
     changed_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 6. O Robô: Função para Gerar Gastos Recorrentes
 CREATE OR REPLACE FUNCTION gerar_gastos_recorrentes_do_mes()
 RETURNS TABLE (
   id_gasto_gerado INT8,
@@ -85,7 +74,6 @@ BEGIN
 END;
 $$;
 
--- 7. Views de Relatórios (Com Segurança Invoker Ativada)
 CREATE OR REPLACE VIEW vw_resumo_mes_orcamento WITH (security_invoker = true) AS
 SELECT 
     c.category_name,
