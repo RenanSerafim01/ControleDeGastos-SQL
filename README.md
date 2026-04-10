@@ -4,7 +4,7 @@ Um sistema robusto de gestão de despesas e finanças pessoais construído puram
 
 ## 🚀 Visão Geral do Projeto
 
-Este repositório contém a modelagem e a lógica de banco de dados para um aplicativo de controle de gastos (SaaS). A arquitetura foi desenhada para garantir que nenhuma regra de negócio seja burlada pelo front-end, utilizando recursos avançados do PostgreSQL para blindar os dados, isolar as contas de diferentes usuários e automatizar processos repetitivos.
+Este repositório contém a modelagem e a lógica de banco de dados para o aplicativo (SaaS) FLUX - Controle de Gastos. A arquitetura foi desenhada para garantir que nenhuma regra de negócio seja burlada pelo front-end, utilizando recursos avançados do PostgreSQL para blindar os dados, isolar as contas de diferentes usuários e automatizar processos repetitivos.
 
 ## 🛠️ Tecnologias e Conceitos Aplicados
 
